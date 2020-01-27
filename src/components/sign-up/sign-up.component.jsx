@@ -27,8 +27,12 @@ handleSubmit = async event => {
   }
 
   try {
-    const { user } = await auth.createUserWithEmailAndPassword(email, password)
-    createUserProfileDocument(user, { displayName })
+    const { user } = await auth.createUserWithEmailAndPassword(
+      email,
+      password);
+
+    await createUserProfileDocument(user, { displayName });
+
     this.setState({
       displayName: '',
       email: '',
@@ -36,13 +40,13 @@ handleSubmit = async event => {
       confirmPassword: ''
     })
   } catch(error) {
-    console.error(error);
+    console.log(error);
   }
 };
 
 handleChange = event => {
   const { name, value } = event.target;
-
+  this.setState({ [name]: value });
 }
 
   render() {
